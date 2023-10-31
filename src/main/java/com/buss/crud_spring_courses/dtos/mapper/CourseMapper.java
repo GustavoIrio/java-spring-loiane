@@ -1,6 +1,7 @@
 package com.buss.crud_spring_courses.dtos.mapper;
 
 import com.buss.crud_spring_courses.dtos.CourseDTO;
+import com.buss.crud_spring_courses.enums.Category;
 import com.buss.crud_spring_courses.model.Course;
 import org.springframework.stereotype.Component;
 
@@ -11,7 +12,7 @@ public class CourseMapper {
         if(course == null) {
             return null;
         }
-        return new CourseDTO(course.getId(), course.getName(), course.getCategory());
+        return new CourseDTO(course.getId(), course.getName(), "FRONTEND");
     }
 
     public Course toEntity(CourseDTO courseDTO) {
@@ -24,7 +25,7 @@ public class CourseMapper {
             course.setId(courseDTO.id());
         }
         course.setName(courseDTO.name());
-        course.setCategory(courseDTO.category());
+        course.setCategory(Category.FRONTEND);
         course.setStatus("Active");
         return course;
     }

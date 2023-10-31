@@ -2,6 +2,7 @@ package com.buss.crud_spring_courses.services;
 
 import com.buss.crud_spring_courses.dtos.CourseDTO;
 import com.buss.crud_spring_courses.dtos.mapper.CourseMapper;
+import com.buss.crud_spring_courses.enums.Category;
 import com.buss.crud_spring_courses.exceptions.RecordNotFoundException;
 import com.buss.crud_spring_courses.repositories.CourseRepository;
 import jakarta.validation.Valid;
@@ -47,7 +48,7 @@ public class CourseService {
         return courseRepository.findById(id)
                 .map(courseFound -> {
                     courseFound.setName(course.name());
-                    courseFound.setCategory(course.category());
+                    courseFound.setCategory(Category.FRONTEND);
                     return courseMapper.toDTO(courseRepository.save(courseFound));
                 }).orElseThrow(()-> new RecordNotFoundException(id));
     }

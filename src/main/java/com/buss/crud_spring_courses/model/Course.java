@@ -1,10 +1,12 @@
 package com.buss.crud_spring_courses.model;
 
 import com.buss.crud_spring_courses.enums.Category;
+import com.buss.crud_spring_courses.enums.Status;
+import com.buss.crud_spring_courses.enums.converters.CategoryConverter;
+import com.buss.crud_spring_courses.enums.converters.StatusConverter;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
@@ -27,13 +29,12 @@ public class Course {
     private String name;
 
     @NotNull
-    @Column(length = 12, nullable = false)
-    @Enumerated(EnumType.STRING)
+    @Column(length = 10, nullable = false)
+    @Convert(converter = CategoryConverter.class)
     private Category category;
 
     @NotNull
-    @Length(max = 10)
-    @Pattern(regexp = "Active|Inactive")
     @Column(length = 12, nullable = false)
-    private String status = "Active";
+    @Convert(converter = StatusConverter.class)
+    private Status status = Status.ACTIVE;
 }
